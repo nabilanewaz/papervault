@@ -64,6 +64,7 @@ AI-powered research paper vault for Computer Science students. Search, upload, o
 |---|---|
 | `VITE_SUPABASE_URL` | Your Supabase project URL |
 | `VITE_SUPABASE_ANON_KEY` | Your Supabase anon/public key |
+| `GROQ_API_KEY` | Groq API key, set as a Supabase Edge Function secret (not a `VITE_` var — used only by `summarize-paper`) |
 
 ## Deployment
 
@@ -76,7 +77,13 @@ To deploy your own instance:
 
 ## Edge Functions
 
-The `summarize-paper` edge function handles AI summarization, key point extraction, flashcard generation, and paper search. To deploy it:
+The `summarize-paper` edge function handles AI summarization, key point extraction, flashcard generation, and paper search. It requires a `GROQ_API_KEY` secret to be set on the Supabase project before it will work:
+
+```bash
+supabase secrets set GROQ_API_KEY=your_groq_key_here --project-ref kcqibwhqnydcqzpwejsb
+```
+
+Then deploy it:
 
 ```bash
 # Set your Supabase access token first
